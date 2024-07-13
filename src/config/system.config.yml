@@ -1,0 +1,30 @@
+# Core
+db:
+  redis:
+    emulate: true
+    namespace: EG
+
+#plugins:
+  # express-gateway-plugin-example:
+  #   param1: 'param from system.config' 
+
+crypto:
+  cipherKey: sensitiveKey
+  algorithm: aes256
+  saltRounds: 10
+
+# OAuth2 Settings
+session:
+  secret: keyboard cat
+  resave: false
+  saveUninitialized: false
+accessTokens: 
+  # Keycloak URL has been configured here to validate the token
+  timeToExpiry: 10
+  tokenType: 'jwt'
+  issuer: 'https://sso.alitasys.com:8443/auth/realms/bbos-realm'
+  audience: 'realm-management'
+refreshTokens:
+  timeToExpiry: 7200000
+authorizationCodes:
+  timeToExpiry: 300000

@@ -1,0 +1,105 @@
+# CreatedBy    : Dinesh
+# CreatedTime  : June 19 2023
+# ModifiedBy   : Dinesh
+# ModifiedTime : Feb 24 2024
+
+http:
+  port: 4003
+admin:
+  port: 9876
+  host: localhost
+
+# Adding all the paths to allow for remote services
+apiEndpoints:
+  baasAuthRestBusinessOpen:
+    paths:
+      [
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/checkemail",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/checkpassword",
+        "/api/rest/baas360/auth/business/1.0.0/user/v2/checkpassword",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/refreshtoken",
+      ]
+  baasAuthRestBusiness:
+    paths:
+      [
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/search",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/metrics",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/add",
+     
+        "/api/rest/baas360/auth/business/1.0.0/twofactor/v1/generateemailcode",
+        "/api/rest/baas360/auth/business/1.0.0/twofactor/v1/setemailsent",
+        "/api/rest/baas360/auth/business/1.0.0/twofactor/v1/verifyemailcode",
+
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/setemailverified",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/setpassword",
+
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/unlock",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/lock",
+
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/lockdevice",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/unlockdevice",
+
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/logout",
+
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/getdetails",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/searchdevice",
+        "/api/rest/baas360/auth/business/1.0.0/user/v1/searchsession",
+      ]
+
+# Adding the host/ port of all the remote services
+serviceEndpoints:
+  baasAuthRestBusinessOpenURL:
+    url: "http://baasauthrestbusiness-container:5001"
+  baasAuthRestBusinessURL:
+    url: "http://baasauthrestbusiness-container:5001"
+
+# Adding policies
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+  - jwt
+  - request-transformer
+
+# Adding pipelines to all the remote services
+pipelines:
+  baasAuthRestBusinessOpenpipelines:
+    apiEndpoints:
+      - baasAuthRestBusinessOpen
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              credentials: true
+      - rate-limit:
+          - action:
+              max: 50
+              windowMs: 1000
+              message: "Too many requests, please try again later."
+      - proxy:
+          - action:
+              serviceEndpoint: baasAuthRestBusinessOpenURL
+              changeOrigin: true
+
+  baasAuthRestBusinesspipelines:
+    apiEndpoints:
+      - baasAuthRestBusiness
+    policies:
+      - cors:
+          - action:
+              origin: "*"
+              credentials: true
+      - rate-limit:
+          - action:
+              max: 50
+              windowMs: 1000
+              message: "Too many requests, please try again later."
+      - proxy:
+          - action:
+              serviceEndpoint: baasAuthRestBusinessURL
+              changeOrigin: true

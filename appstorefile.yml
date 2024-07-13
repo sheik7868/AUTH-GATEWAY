@@ -1,0 +1,32 @@
+# Created By   : Muthu kumar
+# Created Time : June 06 2023
+# ModifiedBy   : Muthu kumar
+# ModifiedTime : June 06 2023
+
+APPSTORE:
+    # Binding the APPSTORE on top of which service is going to run
+    APPSTORE_GATEWAY_URL: "http://baasappstoregateway-container:4001"
+    # Credentials to access that specific instance
+    APPSTORE_USERNAME: "senthilkumar@gove.co"
+    APPSTORE_PASSWORD: "senthil@123"
+
+APPLICATION:
+    # Unique key which was generated and provided to the application
+    APPLICATION_KEY: "55cf89d6-f2d0-43e4-9683-55dd79cbf7ea"
+
+INSTANCE:
+    # Unique key which was generated and provided to the instance
+    INSTANCE_KEY: "13c34d9d-0942-445e-ac64-2342ed01a66e"
+    # INSTANCE_KEY: "65aa8480-9035-4055-8108-cfe83c7d71e1"
+
+CONNECTOR:
+    # Unique code provided for connector type which is used by this service
+    CONNECTOR_TYPE: "SQL-SERVER-DATABASE"
+    # Tenant key of the connector which means this service can only interact with this tenant
+    CONNECTOR_TENANT_KEY: "7011-6424-0341-5423"
+
+SERVICE:
+    # Unique key which was generated and provided to the service
+    SERVICE_KEY: "8917b47e-7b02-4520-9484-e4eaee8c829d"
+    # SERVICE_KEY: "a0054e28-4dcd-4ac3-b2a8-d32a2375a470"
+

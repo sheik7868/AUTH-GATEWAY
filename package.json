@@ -1,0 +1,16 @@
+{
+  "name": "baas-auth-gateway",
+  "description": "This is a service which acts as API gateway for the auth backend",
+  "repository": {},
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express-gateway": "^1.16.11"
+  },
+  "author": {
+    "name": "Dinesh",
+    "email": "dinesh@baas-360.com"
+  }
+}
